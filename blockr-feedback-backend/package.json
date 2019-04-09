@@ -1,0 +1,19 @@
+{
+  "name": "blockr-feedback-backend",
+  "version": "1.0.0",
+  "description": "Backend for the Blockr feedback project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ESD6-blockr/blockr-feedback.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ESD6-blockr/blockr-feedback/issues"
+  },
+  "homepage": "https://github.com/ESD6-blockr/blockr-feedback#readme"
+}
