@@ -1,6 +1,8 @@
 const naclFactory = require('js-nacl');
+const keys = require('../keyStorage');
+const bip39 = require('bip39');
 
-module.exports = function(app){
+module.exports = function(app) {
 
 /* @param pubkey 
 * Storing the pubkey in sessionStorage for user convenience*/
@@ -14,6 +16,15 @@ app.post('/login', async function (req, res) {
 
     let signature = req.body.signature;
     let pubKey = req.body.pubKey;
+
+    if(keys.get(req.body.pubKey)) console.log('Key present');
+    else console.log('key not present');
+
+    const mnemonic = bip39.entropyToMnemonic('128c73c5050bb6cce9ae2fc9bf1ef1e9');
+    console.log(mnemonic);
+
+    // const hexString = nacl.to_hex(nacl.crypto_sign_open(signatureBin, publicKeyBytes)).toString();
+    // console.log(derivedPrivKey)
 
     let result = await verifyAsync(signature, pubKey);
     console.log(result)
