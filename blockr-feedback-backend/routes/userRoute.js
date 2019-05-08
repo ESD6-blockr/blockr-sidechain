@@ -26,16 +26,28 @@ module.exports = function (app) {
     let decodedMessage = await Security.verify(signature, pubKey);
     console.log(`decodedMessage: ${decodedMessage}`.green);
 
-    if(decodedMessage !== message) {
+    if (decodedMessage !== message) {
       res.status(401);
       res.send('[Unauthorized] Supplied public/private key pair doesn\'t match!');
     }
 
-    // STEP 3: generate token
-    res.send('[Authenticated] Login successful!'); 
+    // STEP 3: generate token or something
+    res.send('[Authenticated] Login successful!');
+  });
+
+  app.post('/checkpass', async function (req, res) {
+    let passphrase = req.body.passphrase;
+
+
+    let entropy = bip39.mnemonicToEntropy(passphrase);
+    // res.send(entropy);
 
     // const mnemonic = bip39.entropyToMnemonic('128c73c5050bb6cce9ae2fc9bf1ef1e9');
     // console.log(mnemonic);
+
+
+    let seed = bip39.mnemonicToSeedSync(passphrase).toString('hex');
+    res.send(seed);
   });
 
   //other routes..
