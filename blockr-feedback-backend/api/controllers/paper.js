@@ -36,6 +36,8 @@ app.get("/:hash", (request, response) => {
 /**
  * POST - adds a paper (file) to the IPFS network.
  */
-app.post("/", (request, response) => {});
+app.post("/", (request, response) => {
+  console.log('hey')
+});
 
 module.exports = app;
