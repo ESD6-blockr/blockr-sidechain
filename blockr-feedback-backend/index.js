@@ -1,15 +1,12 @@
 const express = require('express');
 const app = express();
 let bodyParser = require('body-parser');
-
 const port = 3002;
+const routes = require('./routes/routes');
 
 // parse application/json
 app.use(bodyParser.json());
-
-// require all routes
-require('./routes/userRoute')(app); // user specific functionality
-require('./routes/feedbackRoute')(app); // feedback related functionality
+app.use("/api", routes);
 
 app.get('/', (req, res) => res.send('Welcome to back-end of Blockr feedback system!'));
 

@@ -1,21 +1,21 @@
-const keys = require('../keyStorage');
+const express = require("express");
+const keys = require('../../keyStorage');
 const bip39 = require('bip39');
-const Security = require('../security/security');
+const Security = require('../../security/security');
 var colors = require('colors');
+var app = express();
 
-module.exports = function (app) {
-
-  /* @param pubkey 
-  * Storing the pubkey in sessionStorage for user convenience */
-  app.post('/login', async function (req, res) {
+/* @param pubkey 
+* Storing the pubkey in sessionStorage for user convenience */
+app.post('/login', async function (req, res) {
     const pubKey = req.body.pubKey;
     const privKey = req.body.privKey;
 
     // STEP 1: perform api call to blockchain to check existence of public key
     // Because this function doesn't exist yet on the block we mock it by hardcoding some keys in a map
     if (!keys.get(pubKey)) {
-      res.status(401);
-      res.send('[Unauthorized] Supplied public key is not present in blockr!');
+        res.status(401);
+        res.send('[Unauthorized] Supplied public key is not present in blockr!');
     }
 
     // STEP 2: verify that private key matches with entered public key
@@ -27,15 +27,15 @@ module.exports = function (app) {
     console.log(`decodedMessage: ${decodedMessage}`.green);
 
     if (decodedMessage !== message) {
-      res.status(401);
-      res.send('[Unauthorized] Supplied public/private key pair doesn\'t match!');
+        res.status(401);
+        res.send('[Unauthorized] Supplied public/private key pair doesn\'t match!');
     }
 
     // STEP 3: generate token or something
     res.send('[Authenticated] Login successful!');
-  });
+});
 
-  app.post('/checkpass', async function (req, res) {
+app.post('/checkpass', async function (req, res) {
     let passphrase = req.body.passphrase;
 
 
@@ -48,8 +48,9 @@ module.exports = function (app) {
 
     let seed = bip39.mnemonicToSeedSync(passphrase).toString('hex');
     res.send(seed);
-  });
+});
 
-  //other routes..
-}
+//other routes..
+
+module.exports = app;
 
