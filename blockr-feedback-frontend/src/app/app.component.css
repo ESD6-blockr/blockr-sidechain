@@ -1,0 +1,10 @@
+ .mat-toolbar-row{
+    position: fixed
+  }
+
+ .mat-card{
+   background: #eee;
+   color: #000;
+ }
+
+ 
