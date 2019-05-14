@@ -20,10 +20,11 @@ function createWindow() {
     win.on('closed', function () {
         win = null;
     });
-    electron_1.ipcMain.on('getFiles', function (event, arg) {
-        var files = fs.readdirSync(__dirname);
-        win.webContents.send('getFilesResponse', files);
-    });
 }
 electron_1.app.on('ready', createWindow);
+electron_1.ipcMain.on('getFiles', function (event, arg) {
+    console.log('HALLO');
+    var files = fs.readdirSync(__dirname);
+    win.webContents.send('getFilesResponse', files);
+});
 //# sourceMappingURL=main.js.map

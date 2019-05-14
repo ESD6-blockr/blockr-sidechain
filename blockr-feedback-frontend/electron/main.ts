@@ -26,12 +26,14 @@ function createWindow() {
     win.on('closed', () => {
         win = null
     })
-
-    ipcMain.on('getFiles', (event, arg) => {
-        const files = fs.readdirSync(__dirname)
-        win.webContents.send('getFilesResponse', files)
-      })
 }
 
 app.on('ready', createWindow)
+
+
+ipcMain.on('getFiles', (event, arg) => {
+    console.log('HALLO')
+    const files = fs.readdirSync(__dirname)
+    win.webContents.send('getFilesResponse', files)
+  })
 
