@@ -6,5 +6,9 @@
    background: #eee;
    color: #000;
  }
-
- 
+ .mat-form-field-empty.mat-form-field-label {
+  color: green;
+}
+.mat-form-field-underline {
+  background-color: green;
+}
