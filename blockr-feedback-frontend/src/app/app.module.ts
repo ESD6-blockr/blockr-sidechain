@@ -12,16 +12,21 @@ import {MatSpinner} from '@angular/material/progress-spinner';
 import {MatButtonModule} from '@angular/material/button';
 
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
+
 
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
+import { PaperComponent } from './components/paper/paper.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PaperComponent
   ],
   imports: [
+    HttpClientModule,
     FormsModule,
     MatIconModule,
     MatMenuModule,
