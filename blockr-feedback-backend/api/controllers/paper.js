@@ -10,15 +10,15 @@ Buffer = require("ipfs-http-client").Buffer;
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 };
-// const ipfs = ipfsClient('/ip4/127.0.0.1/tcp/5001');
 
-const ipfs = ipfsClient('127.0.0.1', '5001', { protocol: 'http' });
+const ipfs = ipfsClient('blockr.verux.nl', '3031', { protocol: 'http' }); // TODO: Get random file
 
 // TODO: Check metadata of file
 // TODO: If not textfile (not exists or image), save file to location and tell user where to find the file
 app.get("/:hash", (req, res) => {
   let ipfsHash = req.params.hash;
   ipfs.get(`/ipfs/${ipfsHash}`, (error, file) => {
+    console.log(file);
     fs.writeFile(`${__dirname}/test.pdf`, file[0].content, err => {
       sleep(500).then(() => {
         let filePath = path.join(__dirname, "test.pdf");
